@@ -1,5 +1,5 @@
 plugins {
-  id("org.metaborg.spoofax.gradle.langspec") version "0.2.3"
+  id("org.metaborg.spoofax.gradle.langspec") version "0.2.4"
   id("de.set.ecj") // Use ECJ to speed up compilation of Stratego's generated Java files.
   `maven-publish`
 }
