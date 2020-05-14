@@ -16,6 +16,12 @@ To start the CLI, run:
 ./gradlew runCli
 ```
 
+To start the Eclipse plugin, run:
+
+```
+./gradlew runEclipse
+```
+
 To start the IntelliJ plugin, run:
 
 ```
@@ -48,13 +54,12 @@ An example task to show the scope graph of a file is found at `mod.spoofax/src/m
 
 ### mod.cli
 
-A command-line interface for the "mod" language, based entirely on the `mod.spoofax` project.
+A command-line interface for the "mod" language, based on the `mod.spoofax` project.
 
 ### mod.eclipse/mod.eclipse.externaldeps
 
-An Eclipse plugin for the "mod" language, based entirely on the `mod.spoofax` project.
-This currently does not work, as the `spoofax.eclipse` plugin has not been published properly
+An Eclipse plugin for the "mod" language, based on the `mod.spoofax` project.
 
 ### mod.intellij
 
-An IntelliJ plugin for the "mod" language, based entirely on the `mod.spoofax` project.
+An IntelliJ plugin for the "mod" language, based on the `mod.spoofax` project.
