@@ -4,8 +4,6 @@ import mb.spoofax.compiler.util.*
 
 plugins {
   id("org.metaborg.spoofax.compiler.gradle.spoofaxcore.language")
-  id("org.metaborg.gradle.config.junit-testing")
-  id("de.set.ecj") // Use ECJ to speed up compilation of Stratego's generated Java files.
 }
 
 dependencies {
@@ -38,6 +36,18 @@ spoofaxLanguageProject {
   ))
 }
 
-ecj {
-  toolVersion = "3.20.0"
+val junitVersion = "5.5.2"
+dependencies {
+  testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
+  testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
+}
+tasks.withType<Test> {
+  useJUnitPlatform()
+  testLogging {
+    events(org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED)
+    showExceptions = true
+    showCauses = true
+    showStackTraces = true
+    exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+  }
 }
