@@ -1,19 +1,19 @@
-module static-semantics
+module main
 
 signature
 
   sorts Start constructors
     Program : list(Item) -> Start
-  
+
   sorts Item constructors
     Dbg :          Exp        -> Item
     Let : string * Exp        -> Item
     Use :          UseRef     -> Item
-    
+
   sorts UseRef constructors
     UseRef  : string          -> UseRef
     QUseRef : UseRef * string -> UseRef
-    
+
   sorts Exp constructors
     NumLit :          int -> Exp
     Mod    :   list(Item) -> Exp
@@ -22,7 +22,7 @@ signature
 
   sorts TYPE constructors
     NUM :          TYPE
-    MOD : scope -> TYPE 
+    MOD : scope -> TYPE
 
   relations
     typeOfDecl : occurrence -> TYPE
@@ -36,19 +36,10 @@ signature
 
 rules // Program
 
-//  programOK : Start
-//  
-//  programOK(Program(items)) :- {s}
-//    new s,
-//    itemsOK(s, items).
-
   projectOk : scope
-
   projectOk(s).
 
-
   fileOk : scope * Start
-
   fileOk(s, Program(items)) :-
     itemsOK(s, items).
 
@@ -80,7 +71,7 @@ rules // Use reference
   resolveUse : scope * string -> scope
 
   resolveUse(s, id) = S :- {id'}
-	query typeOfDecl 
+	query typeOfDecl
   	  filter P* and { Var{x'} :- x' == id }
   	  min $ < P and true
   	  in s |-> [(_, (Var{id'}, MOD(S)))],
@@ -92,7 +83,7 @@ rules // Expression
 
   typeOfExp(s, NumLit(_)) = NUM().
   typeOfExp(s, Mod(items)) = MOD(s_mod) :-
-  	new s_mod, 
+  	new s_mod,
   	s_mod -P-> s,
     itemsOK(s_mod, items).
   typeOfExp(s, Ref(id)) = T :- {id'}
@@ -100,7 +91,7 @@ rules // Expression
   	@id.ref := id'.
   typeOfExp(s, QRef(exp, id)) = T :- {s_mod id'}
   	typeOfExp(s, exp) == MOD(s_mod),
-	query typeOfDecl 
+	query typeOfDecl
   	  filter e and { Var{x'} :- x' == id } // For qualified references, only look one level deep (filter e).
   	  min and true
   	  in s_mod |-> [(_, (Var{id'}, T))],

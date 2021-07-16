@@ -1,39 +1,14 @@
-import mb.spoofax.compiler.gradle.spoofaxcore.*
-import mb.spoofax.compiler.spoofaxcore.*
-import mb.spoofax.compiler.util.*
-
 plugins {
-  id("org.metaborg.spoofax.compiler.gradle.spoofaxcore.language")
+  `java-library`
+  id("org.metaborg.spoofax.lwb.compiler.gradle.language")
 }
 
+val checkerFrameworkVersion = "3.16.0"
 dependencies {
-  testImplementation("org.metaborg:log.backend.slf4j")
-  testImplementation("org.slf4j:slf4j-simple:1.7.30")
-  testCompileOnly("org.checkerframework:checker-qual-android")
-}
+  compileOnly("org.checkerframework:checker-qual-android:$checkerFrameworkVersion")
 
-spoofaxLanguageProject {
-  settings.set(LanguageProjectSettings(
-    shared = Shared.builder()
-      .name("Mod")
-      .defaultBasePackageId("mb.mod"),
-
-    parser = ParserCompiler.LanguageProjectInput.builder()
-      .startSymbol("Start"),
-    styler = StylerCompiler.LanguageProjectInput.builder(),
-    completer = CompleterCompiler.LanguageProjectInput.builder(),
-    strategoRuntime = StrategoRuntimeCompiler.LanguageProjectInput.builder()
-      .enableNaBL2(false)
-      .enableStatix(true)
-      .copyCTree(true)
-      .copyClasses(false)
-      .copyJavaStrategyClasses(false),
-    constraintAnalyzer = ConstraintAnalyzerCompiler.LanguageProjectInput.builder()
-      .multiFile(true),
-
-    builder = LanguageProjectCompiler.Input.builder()
-      .languageSpecificationDependency(GradleDependency.project(":mod.spoofax2"))
-  ))
+  testImplementation("org.metaborg:spoofax.test:0.9.0")
+  testCompileOnly("org.checkerframework:checker-qual-android:$checkerFrameworkVersion")
 }
 
 val junitVersion = "5.5.2"

@@ -1,0 +1,13 @@
+module main
+
+imports
+
+  statixruntime
+  statix/api
+
+  pp
+  completion
+
+rules
+
+  editor-analyze = stx-editor-analyze(id, id|"main", "projectOk", "fileOk")
