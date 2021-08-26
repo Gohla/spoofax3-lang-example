@@ -4,6 +4,10 @@ imports
 
   lex
 
+context-free sorts
+
+  Start Item UseRef Exp
+
 context-free start-symbols
 
   Start
