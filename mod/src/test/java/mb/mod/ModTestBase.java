@@ -3,10 +3,11 @@ package mb.mod;
 import mb.log.dagger.DaggerLoggerComponent;
 import mb.log.dagger.LoggerModule;
 import mb.resource.classloader.NoopClassLoaderUrlResolver;
+import mb.resource.classloader.FSResourceClassLoaderToNativeResolver;
 import mb.spoofax.test.SingleBaseLanguageTestBase;
 
 class ModTestBase extends SingleBaseLanguageTestBase {
-    public static final ModClassLoaderResources classloaderResources = new ModClassLoaderResources(new NoopClassLoaderUrlResolver());
+    public static final ModClassLoaderResources classloaderResources = new ModClassLoaderResources(new NoopClassLoaderUrlResolver(), new FSResourceClassLoaderToNativeResolver());
 
     public ModTestBase() {
         super(

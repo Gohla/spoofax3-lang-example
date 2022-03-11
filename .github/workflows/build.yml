@@ -5,13 +5,17 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-20.04, windows-2019, macos-10.15]
-        java: [11]
-        gradle: [5.6.4, 6.8.2]
-        experimental: [false]
+        os: [ ubuntu-20.04, windows-2019, macos-10.15, macos-11 ]
+        java: [ 11 ]
+        gradle: [ 6.9.2, 7.4.1 ]
+        experimental: [ false ]
     runs-on: ${{ matrix.os }}
     continue-on-error: ${{ matrix.experimental }}
     steps:
+      # Increases page file size on Windows, fixing JVM crashes such as "The paging file is too small for this operation
+      # to complete"
+      - uses: al-cheb/configure-pagefile-action@v1.2
+        if: runner.os == 'Windows'
       - uses: actions/checkout@v2
       - uses: actions/setup-java@v1
         with:
@@ -39,3 +43,8 @@ jobs:
         with:
           gradle-version: ${{ matrix.gradle }}
           arguments: buildAll --parallel --stacktrace
+      # Print JVM crash/replay logs if the previous step failed.
+      - id: print-jvm-crash-logs
+        if: ${{ failure() }}
+        run: cat hs_err_pid*.log; cat **/hs_err_pid*.log; cat replay_pid*.log; cat **/replay_pid*.log; true
+        shell: bash {0}
