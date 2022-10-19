@@ -26,3 +26,18 @@ tasks.withType<Test> {
     exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
   }
 }
+
+tasks.register("compileDependenciesList") {
+  project.configurations.compileClasspath.get().incoming.resolutionResult.allDependencies
+    .filter { !it.isConstraint }
+    .distinctBy { it.requested }
+    .sortedBy { it.requested.displayName }
+    .forEach { println(it.requested)  }
+}
+tasks.register("runtimeDependenciesList") {
+  project.configurations.runtimeClasspath.get().incoming.resolutionResult.allDependencies
+    .filter { !it.isConstraint }
+    .distinctBy { it.requested }
+    .sortedBy { it.requested.displayName }
+    .forEach { println(it.requested)  }
+}
