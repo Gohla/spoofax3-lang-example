@@ -10,7 +10,7 @@ plugins {
   id("org.metaborg.spoofax.compiler.gradle.intellij") version("0.19.3") apply false
 
   id("de.set.ecj") version "1.4.1" apply false
-  id("org.metaborg.coronium.bundle") version "0.3.15" apply false
+  id("org.metaborg.coronium.bundle") version "0.3.16" apply false
   id("biz.aQute.bnd.builder") version "5.3.0" apply false
   id("org.jetbrains.intellij") version "1.4.0" apply false
 }

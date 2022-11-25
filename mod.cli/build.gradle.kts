@@ -7,6 +7,10 @@ languageCliProject {
   adapterProject.set(project(":mod"))
 }
 
+tasks.withType<Jar> {
+  duplicatesStrategy = DuplicatesStrategy.INCLUDE
+}
+
 tasks {
   // Disable currently unused distribution tasks.
   distZip.configure { enabled = false }
