@@ -13,13 +13,19 @@ To build and test everything, run:
 To start the CLI and parse a program, run:
 
 ```
-./gradlew :mod.cli:run --args="parse <absolute path to mod file>"
+./gradlew :mod.cli:run --args="parse ../example/nested.mod"
 ```
 
 To create a GraalVM Native Image for the CLI, run:
 
 ```
 ./gradlew :mod.cli:nativeImage
+```
+
+After building it, you can run the executable. For example:
+
+```
+./mod.cli/build/graal/mod parse ./example/nested.mod
 ```
 
 To start the Eclipse plugin, run:
@@ -49,7 +55,7 @@ We extend the instance with `extend-instance = java org.example.mod.ModExtendIns
 
 A command-line interface for the "mod" language, based on the `mod` project.
 
-### mod.eclipse/mod.eclipse.externaldeps
+### mod.eclipse
 
 An Eclipse plugin for the "mod" language, based on the `mod` project.
 
