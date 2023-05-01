@@ -17,7 +17,7 @@ jobs:
       - uses: al-cheb/configure-pagefile-action@v1.3
         if: runner.os == 'Windows'
       - uses: actions/checkout@v3
-      - uses: actions/setup-java@v2
+      - uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
           java-version: ${{ matrix.java }}
