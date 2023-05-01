@@ -1,4 +1,4 @@
-package mb.mod;
+package org.example.mod;
 
 import mb.common.message.Severity;
 import mb.common.util.MapView;
@@ -11,8 +11,8 @@ import mb.resource.ReadableResource;
 import mb.resource.ResourceKey;
 import mb.stratego.common.StrategoUtil;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.spoofax.interpreter.terms.IStrategoTerm;
 
 import java.util.HashMap;

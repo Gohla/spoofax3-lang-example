@@ -1,7 +1,7 @@
 shared.defaultArtifactId=mod
 shared.defaultClassPrefix=Mod
-shared.defaultGroupId=org.metaborg
-shared.defaultPackageId=mb.mod
+shared.defaultGroupId=org.example
+shared.defaultPackageId=org.example.mod
 shared.defaultVersion=0.1.0
 stratego.languageStrategyAffix=mod
 stratego.source.files.languageStrategyAffix=mod

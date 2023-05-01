@@ -1,9 +1,9 @@
-package mb.mod;
+package org.example.mod;
 
 import mb.log.dagger.DaggerLoggerComponent;
 import mb.log.dagger.LoggerModule;
-import mb.resource.classloader.NoopClassLoaderUrlResolver;
 import mb.resource.classloader.FSResourceClassLoaderToNativeResolver;
+import mb.resource.classloader.NoopClassLoaderUrlResolver;
 import mb.spoofax.test.SingleBaseLanguageTestBase;
 
 class ModTestBase extends SingleBaseLanguageTestBase {

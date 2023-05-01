@@ -40,9 +40,13 @@ tasks.register("runCli") {
   group = "development"
   dependsOn(":mod.cli:run")
 }
+tasks.register("createCliNativeImage") {
+  group = "development"
+  dependsOn(":mod.cli:nativeImage")
+}
 tasks.register("runEclipse") {
   group = "development"
-  dependsOn(":mod.eclipse:run")
+  dependsOn(":mod.eclipse:runEclipse")
 }
 tasks.register("runIntelliJ") {
   group = "development"

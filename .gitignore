@@ -26,5 +26,8 @@ hs_err_pid*
 **/src-gen
 **/target
 
+# Eclipse Runner
+Eclipse.app/
+
 # Sublime Text
 /*.sublime-workspace

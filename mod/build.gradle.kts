@@ -7,7 +7,7 @@ val checkerFrameworkVersion = "3.16.0"
 dependencies {
   compileOnly("org.checkerframework:checker-qual-android:$checkerFrameworkVersion")
 
-  testImplementation("org.metaborg:spoofax.test:0.10.0")
+  testImplementation("org.metaborg:spoofax.test:0.19.4")
   testCompileOnly("org.checkerframework:checker-qual-android:$checkerFrameworkVersion")
 }
 
@@ -25,19 +25,4 @@ tasks.withType<Test> {
     showStackTraces = true
     exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
   }
-}
-
-tasks.register("compileDependenciesList") {
-  project.configurations.compileClasspath.get().incoming.resolutionResult.allDependencies
-    .filter { !it.isConstraint }
-    .distinctBy { it.requested }
-    .sortedBy { it.requested.displayName }
-    .forEach { println(it.requested)  }
-}
-tasks.register("runtimeDependenciesList") {
-  project.configurations.runtimeClasspath.get().incoming.resolutionResult.allDependencies
-    .filter { !it.isConstraint }
-    .distinctBy { it.requested }
-    .sortedBy { it.requested.displayName }
-    .forEach { println(it.requested)  }
 }
