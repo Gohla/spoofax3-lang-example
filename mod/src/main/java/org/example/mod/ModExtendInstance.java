@@ -1,5 +1,6 @@
 package org.example.mod;
 
+import mb.common.util.ListView;
 import mb.spoofax.core.language.cli.CliCommand;
 import mb.spoofax.core.language.cli.CliParam;
 import mb.spoofax.core.language.command.AutoCommandRequest;
@@ -25,6 +26,11 @@ import java.util.Set;
 
 public class ModExtendInstance extends ModInstance {
     private final ModShowParsedAstCommand modShowParsedAstCommand;
+    private final ModShowParsedTokensCommand modShowParsedTokensCommand;
+
+    private final ModShowPreAnalyzeAstCommand modShowPreAnalyzeAstCommand;
+    private final ModShowScopeGraphCommand modShowScopeGraphCommand;
+    private final ModShowScopeGraphAstCommand modShowScopeGraphAstCommand;
     private final ModShowAnalyzedAstCommand modShowAnalyzedAstCommand;
 
     // NOTE: this constructor needs to be kept up to date with the one in ModInstance
@@ -49,18 +55,50 @@ public class ModExtendInstance extends ModInstance {
         Set<AutoCommandRequest<?>> autoCommandDefs
     ) {
         super(modParse, modTokenize, modCheckMulti, modCheckDeaggregator, modStyle, noneResolveTaskDef, noneHoverTaskDef, modResourceExports, modShowParsedAstCommand, modShowParsedTokensCommand, modShowPreAnalyzeAstCommand, modShowScopeGraphCommand, modShowScopeGraphAstCommand, modShowAnalyzedAstCommand, modTestStrategoTaskDef, modAnalyze, commandDefs, autoCommandDefs);
+
         this.modShowParsedAstCommand = modShowParsedAstCommand;
+        this.modShowParsedTokensCommand = modShowParsedTokensCommand;
+
+        this.modShowPreAnalyzeAstCommand = modShowPreAnalyzeAstCommand;
+        this.modShowScopeGraphCommand = modShowScopeGraphCommand;
+        this.modShowScopeGraphAstCommand = modShowScopeGraphAstCommand;
         this.modShowAnalyzedAstCommand = modShowAnalyzedAstCommand;
     }
 
     @Override public CliCommand getCliCommand() {
-        final CliCommand parse = CliCommand.of("parse", "Parse a Mod source file and show its ATerm", modShowParsedAstCommand,
-            CliParam.positional("file", 0, "file", "Mod source file")
+        final CliParam fileParam = CliParam.positional("file", 0, "FILE", "Mod source file");
+        final CliParam projectParam = CliParam.option("rootDirectory", ListView.of("--project"), false, "DIR", "Project directory to perform analysis in");
+
+        final CliCommand parse = CliCommand.of("parse", "Parse a Mod source file and show its AST", modShowParsedAstCommand,
+            fileParam
         );
-        final CliCommand analyze = CliCommand.of("analyze", "Parse and analyze a Mod source file and show its analyzed ATerm", modShowAnalyzedAstCommand,
-            CliParam.positional("rootDirectory", 0, "rootDirectory", "Root directory to perform analysis in"),
-            CliParam.positional("file", 1, "file", "Mod source file")
+        final CliCommand showParsedTokens = CliCommand.of("show-parsed-Tokens", "Parse a Mod source file and show its parsed tokens", modShowParsedTokensCommand,
+            fileParam
         );
-        return CliCommand.of("Mod", parse, analyze);
+
+        final CliCommand showPreAnalyzedAst = CliCommand.of("show-pre-analyzed-ast", "Parse a Mod source file and show its pre-analyzed AST", modShowPreAnalyzeAstCommand,
+            fileParam
+        );
+        final CliCommand showScopeGraph = CliCommand.of("show-scope-graph", "Parse and analyze a Mod source file and show its scope graph", modShowScopeGraphCommand,
+            fileParam,
+            projectParam
+        );
+        final CliCommand showScopeGraphAst = CliCommand.of("show-scope-graph-ast", "Parse and analyze a Mod source file and show its scope graph AST", modShowScopeGraphAstCommand,
+            fileParam,
+            projectParam
+        );
+        final CliCommand showAnalyzedAst = CliCommand.of("show-analyzed-ast", "Parse and analyze a Mod source file and show its analyzed AST", modShowAnalyzedAstCommand,
+            fileParam,
+            projectParam
+        );
+        return CliCommand.of("Mod",
+            parse,
+            showParsedTokens,
+
+            showPreAnalyzedAst,
+            showScopeGraph,
+            showScopeGraphAst,
+            showAnalyzedAst
+        );
     }
 }
