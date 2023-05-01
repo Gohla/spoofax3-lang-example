@@ -34,6 +34,12 @@ To start the Eclipse plugin, run:
 ./gradlew :mod.eclipse:runEclipse
 ```
 
+To start the IntelliJ plugin, run:
+
+```
+./gradlew :mod.intellij:runIde
+```
+
 ## Components
 
 This Spoofax 3 language project consists of the following sub-projects:
@@ -52,3 +58,7 @@ A command-line interface for the "mod" language, based on the `mod` project.
 ### mod.eclipse
 
 An Eclipse plugin for the "mod" language, based on the `mod` project.
+
+### mod.intellij
+
+An IntelliJ plugin for the "mod" language, based on the `mod` project.

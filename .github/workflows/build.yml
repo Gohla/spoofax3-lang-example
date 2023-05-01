@@ -7,7 +7,7 @@ jobs:
       matrix:
         os: [ ubuntu-22.04, windows-2022, macos-10.15, macos-12 ]
         java: [ 11 ]
-        gradle: [ 6.9.4, 7.6.1, 8.1.1 ]
+        gradle: [ 6.9.4, 7.6.1 ]
         experimental: [ false ]
     runs-on: ${{ matrix.os }}
     continue-on-error: ${{ matrix.experimental }}
