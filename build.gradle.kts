@@ -12,7 +12,6 @@ plugins {
   id("de.set.ecj") version "1.4.1" apply false
   id("org.metaborg.coronium.bundle") version "0.3.16" apply false
   id("biz.aQute.bnd.builder") version "5.3.0" apply false
-  id("org.jetbrains.intellij") version "1.4.0" apply false
 }
 
 allprojects {
@@ -47,10 +46,6 @@ tasks.register("createCliNativeImage") {
 tasks.register("runEclipse") {
   group = "development"
   dependsOn(":mod.eclipse:runEclipse")
-}
-tasks.register("runIntelliJ") {
-  group = "development"
-  dependsOn(":mod.intellij:runIde")
 }
 
 tasks.register("buildAll") {
