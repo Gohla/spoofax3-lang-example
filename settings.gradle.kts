@@ -13,4 +13,3 @@ if(org.gradle.util.VersionNumber.parse(gradle.gradleVersion).major < 6) {
 include("mod")
 include("mod.cli")
 include("mod.eclipse")
-include("mod.intellij")
