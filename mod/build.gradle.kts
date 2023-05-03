@@ -7,7 +7,7 @@ val checkerFrameworkVersion = "3.16.0"
 dependencies {
   compileOnly("org.checkerframework:checker-qual-android:$checkerFrameworkVersion")
 
-  testImplementation("org.metaborg:spoofax.test:0.19.5")
+  testImplementation("org.metaborg:spoofax.test:0.19.6")
   testCompileOnly("org.checkerframework:checker-qual-android:$checkerFrameworkVersion")
 }
 
